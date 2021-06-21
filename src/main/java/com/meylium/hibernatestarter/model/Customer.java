@@ -6,13 +6,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "customers")
 @Getter
 @Setter
 @NoArgsConstructor
-public class User extends BaseEntity {
+public class Customer extends BaseEntity {
 
     @Column(name = "full_name")
     private String fullName;
@@ -20,5 +21,11 @@ public class User extends BaseEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "birth_date")
     private Date birthDate;
+
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private Profile profile;
+
+    @OneToMany(mappedBy = "customer", cascade = {CascadeType.REMOVE})
+    private List<Order> orders;
 
 }
