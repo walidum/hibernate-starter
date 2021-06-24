@@ -4,6 +4,8 @@ import com.meylium.hibernatestarter.model.Order;
 import com.meylium.hibernatestarter.repo.OrderRepo;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class OrdersService {
     private final OrderRepo orderRepo;
@@ -12,6 +14,7 @@ public class OrdersService {
         this.orderRepo = orderRepo;
     }
 
+    @Transactional
     public Order create(Order order) {
         return this.orderRepo.save(order);
     }
